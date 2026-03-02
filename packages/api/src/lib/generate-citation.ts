@@ -5,21 +5,21 @@ import {
   bibTeXResponseSchema,
   type PageData,
 } from "@zitiernudel/core/types";
-import { SYSTEM_PROMPT } from "../prompt.js";
+import { SYSTEM_PROMPT } from "../prompt";
 
 /**
  * Generate a fallback citation key from page data.
  */
 const generateFallbackKey = (pageData: PageData): string => {
   const author =
-    pageData.meta.authors[0] || pageData.meta.siteName || "unknown";
+    pageData.meta?.authors[0] ?? pageData.meta?.siteName ?? "unknown";
   const year = new Date().getFullYear();
 
   // Extract surname or site name
   const surname = author.split(/\s+/).pop() || "unknown";
 
   // Create slug from title
-  const slug = pageData.title
+  const slug = (pageData.title ?? "untitled")
     .split(/\s+/)
     .slice(0, 2)
     .join("")
@@ -35,8 +35,8 @@ const generateFallbackKey = (pageData: PageData): string => {
 const generateFallbackBibTeX = (pageData: PageData): string => {
   const key = generateFallbackKey(pageData);
   const author =
-    pageData.meta.authors[0] || pageData.meta.siteName || "Unbekannt";
-  const title = pageData.title || "Ohne Titel";
+    pageData.meta?.authors[0] ?? pageData.meta?.siteName ?? "Unbekannt";
+  const title = pageData.title ?? "Ohne Titel";
   const today = new Date().toISOString().split("T")[0];
 
   return [
@@ -57,28 +57,28 @@ const buildUserMessage = (pageData: PageData): string => {
   const parts = [
     ...initialParts,
     `URL: ${pageData.url}\n`,
-    `Titel: ${pageData.title}\n`,
+    `Titel: ${pageData.title ?? "Unbekannt"}\n`,
   ];
 
   // Add metadata
-  if (pageData.meta.authors.length > 0) {
+  if (pageData.meta && pageData.meta.authors.length > 0) {
     parts.push(`\nAutoren: ${pageData.meta.authors.join(", ")}`);
   }
 
-  if (pageData.meta.description) {
+  if (pageData.meta?.description) {
     parts.push(`\nBeschreibung: ${pageData.meta.description}`);
   }
 
-  if (pageData.meta.siteName) {
+  if (pageData.meta?.siteName) {
     parts.push(`\nWebsite: ${pageData.meta.siteName}`);
   }
 
-  if (pageData.meta.publishedDate) {
+  if (pageData.meta?.publishedDate) {
     parts.push(`\nVeröffentlicht: ${pageData.meta.publishedDate}`);
   }
 
   // Add OpenGraph tags if present
-  if (Object.keys(pageData.meta.ogTags).length > 0) {
+  if (pageData.meta && Object.keys(pageData.meta.ogTags).length > 0) {
     parts.push(`\n## OpenGraph Meta-Tags:`);
     for (const [key, value] of Object.entries(pageData.meta.ogTags)) {
       parts.push(`- ${key}: ${value}`);
@@ -86,7 +86,7 @@ const buildUserMessage = (pageData: PageData): string => {
   }
 
   // Add citation tags (important for academic/legal sources)
-  if (Object.keys(pageData.meta.citationTags).length > 0) {
+  if (pageData.meta && Object.keys(pageData.meta.citationTags).length > 0) {
     parts.push(`\n## Citation Meta-Tags:`);
     for (const [key, value] of Object.entries(pageData.meta.citationTags)) {
       parts.push(`- ${key}: ${value}`);
@@ -94,7 +94,7 @@ const buildUserMessage = (pageData: PageData): string => {
   }
 
   // Add JSON-LD structured data
-  if (pageData.meta.ldJson.length > 0) {
+  if (pageData.meta && pageData.meta.ldJson.length > 0) {
     parts.push(`\n## Strukturierte Daten (JSON-LD):`);
     parts.push("```json");
     parts.push(JSON.stringify(pageData.meta.ldJson, null, 2));
@@ -108,8 +108,10 @@ const buildUserMessage = (pageData: PageData): string => {
   }
 
   // Add page content (markdown)
-  parts.push(`\n## Seiteninhalt (Markdown):`);
-  parts.push(pageData.markdown);
+  if (pageData.markdown) {
+    parts.push(`\n## Seiteninhalt (Markdown):`);
+    parts.push(pageData.markdown);
+  }
 
   return parts.join("\n");
 };

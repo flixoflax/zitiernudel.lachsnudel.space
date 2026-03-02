@@ -20,6 +20,12 @@ export default defineConfig(sheriff(sheriffOptions), [
     rules: {
       "import/no-default-export": "off",
       "import/no-anonymous-default-export": "off",
+      "@typescript-eslint/restrict-template-expressions": [
+        "error",
+        {
+          allowNumber: true,
+        },
+      ],
     },
   },
 ]);

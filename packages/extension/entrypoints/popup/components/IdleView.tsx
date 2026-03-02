@@ -39,7 +39,7 @@ export const IdleView = ({
       </div>
 
       {/* Meta summary */}
-      {pageData.meta.authors.length > 0 && (
+      {pageData.meta && pageData.meta.authors.length > 0 && (
         <p className="text-xs text-zinc-500">
           <span className="font-medium">Autor:</span>{" "}
           {pageData.meta.authors.join(", ")}

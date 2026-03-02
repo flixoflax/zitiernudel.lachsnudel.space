@@ -35,24 +35,58 @@ export const pageMetaSchema = z.object({
 });
 
 /**
+ * Schema for PDF-specific metadata extracted from the PDF file.
+ */
+export const pdfMetadataSchema = z.object({
+  /** Title extracted from PDF metadata. */
+  title: z.string().nullable().optional(),
+
+  /** Author extracted from PDF metadata. */
+  author: z.string().nullable().optional(),
+
+  /** Subject/keywords from PDF metadata. */
+  subject: z.string().nullable().optional(),
+
+  /** Creation date from PDF metadata. */
+  creationDate: z.string().nullable().optional(),
+
+  /** Number of pages in the PDF. */
+  pageCount: z.number().nullable().optional(),
+});
+
+/**
  * Schema for complete page data collected by the extension.
  * This is the payload sent to the API for BibTeX generation.
+ * 
+ * Supports both regular web pages and PDF files.
  */
 export const pageDataSchema = z.object({
-  /** Full URL of the page. */
+  /** Full URL of the page or PDF. */
   url: z.string(),
 
-  /** Page title from <title> or og:title. */
-  title: z.string(),
+  /** Page/document title from <title>, og:title, or PDF metadata. */
+  title: z.string().optional(),
 
   /** Text the user had selected, or null if nothing was selected. */
-  selectedText: z.string().nullable(),
+  selectedText: z.string().nullable().optional(),
 
-  /** Extracted metadata from page head. */
-  meta: pageMetaSchema,
+  /** Extracted metadata from page head (web pages only). */
+  meta: pageMetaSchema.optional(),
 
-  /** Cleaned page content converted to Markdown (~4000 chars max). */
-  markdown: z.string(),
+  /** Cleaned page content converted to Markdown (~4000 chars max, web pages only). */
+  markdown: z.string().optional(),
+
+  /** Flag indicating this is a PDF file. */
+  isPDF: z.boolean().optional(),
+
+  /** PDF binary data as number array (for JSON serialization). */
+  pdfData: z.array(z.number()).optional(),
+
+  /** PDF-specific metadata extracted from the file. */
+  metadata: pdfMetadataSchema.optional(),
+
+  /** Internal error message if processing failed. */
+  _error: z.string().optional(),
 });
 
 // ============================================================================

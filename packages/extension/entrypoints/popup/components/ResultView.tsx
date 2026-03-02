@@ -7,6 +7,26 @@ interface ResultViewProps {
   onRegenerate: () => void;
 }
 
+/**
+ * Get confidence color class names based on confidence level.
+ */
+const getConfidenceColor = (confidence: string): string => {
+  switch (confidence) {
+    case "high": {
+      return "text-emerald-700 bg-emerald-50 border-emerald-200";
+    }
+    case "medium": {
+      return "text-amber-700 bg-amber-50 border-amber-200";
+    }
+    case "low": {
+      return "text-orange-700 bg-orange-50 border-orange-200";
+    }
+    default: {
+      return "text-zinc-700 bg-zinc-50 border-zinc-200";
+    }
+  }
+};
+
 export const ResultView = ({
   response,
   onRegenerate,
@@ -38,24 +58,6 @@ export const ResultView = ({
     setValue(response.bibtex);
   }, [response.bibtex]);
 
-  // Get confidence color
-  const getConfidenceColor = (confidence: string) => {
-    switch (confidence) {
-      case "high": {
-        return "text-emerald-700 bg-emerald-50 border-emerald-200";
-      }
-      case "medium": {
-        return "text-amber-700 bg-amber-50 border-amber-200";
-      }
-      case "low": {
-        return "text-orange-700 bg-orange-50 border-orange-200";
-      }
-      default: {
-        return "text-zinc-700 bg-zinc-50 border-zinc-200";
-      }
-    }
-  };
-
   return (
     <div className="flex flex-col gap-3">
       {/* Metadata */}
@@ -82,8 +84,8 @@ export const ResultView = ({
         <div className="rounded-md bg-amber-50 border border-amber-200 px-3 py-2">
           <p className="text-xs font-medium text-amber-900 mb-1">Hinweise:</p>
           <ul className="text-xs text-amber-700 space-y-0.5 list-disc list-inside">
-            {response.warnings.map((warning, index) => (
-              <li key={index}>{warning}</li>
+            {response.warnings.map((warning) => (
+              <li key={warning}>{warning}</li>
             ))}
           </ul>
         </div>
