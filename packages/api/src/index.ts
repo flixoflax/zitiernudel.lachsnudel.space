@@ -1,15 +1,50 @@
 import { Hono } from "hono";
+import { bearerAuth } from "hono/bearer-auth";
+import { cors } from "./middleware/cors.js";
+import { citeRoutes } from "./routes/cite.js";
 
 const app = new Hono();
+const token = Bun.env.API_TOKEN ?? "L4ch5nud3ln";
 
-const welcomeStrings = [
-  "Hello Hono!",
-  "To learn more about Hono on Vercel, visit https://vercel.com/docs/frameworks/backend/hono",
-];
+// CORS middleware (must come first to handle preflight requests)
+app.use("*", cors());
 
-app.get("/", (c) => c.text(welcomeStrings.join("\n\n")));
+// Bearer auth middleware (protects all routes)
+app.use(
+  "*",
+  bearerAuth({
+    token,
+    noAuthenticationHeader: {
+      message: (c) => {
+        c.status(401);
+      },
+    },
+    invalidAuthenticationHeader: {
+      message: (c) => {
+        c.status(401);
+      },
+    },
+    invalidToken: {
+      message: (c) => {
+        c.status(401);
+      },
+    },
+  }),
+);
+
+// Health check endpoint
+app.get("/", (c) => {
+  return c.json({
+    name: "ZitierNudel API",
+    version: "1.0.0",
+    status: "healthy",
+  });
+});
+
+// Citation generation endpoint
+app.route("/api/cite", citeRoutes);
 
 export default {
-  port: 3001,
+  port: 8080,
   fetch: app.fetch,
 };

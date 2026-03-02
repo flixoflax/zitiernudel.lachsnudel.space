@@ -1,5 +1,5 @@
 {
-  "name": "zitier-nudel",
+  "name": "@zitiernudel/extension",
   "description": "Markiere eine Quelle im Browser, klick auf die Nudel, und bekomme einen fertigen BibTeX-Eintrag im hu-jura Format. Für alle, die lieber schreiben als zitieren.",
   "private": true,
   "version": "0.0.0",
@@ -20,7 +20,8 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "tailwindcss": "^4.2.1",
-    "turndown": "^7.2.2"
+    "turndown": "^7.2.2",
+    "@zitiernudel/core": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^19.2.13",

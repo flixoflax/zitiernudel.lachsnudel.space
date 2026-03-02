@@ -1,11 +1,11 @@
 import type { Settings } from "@/lib/types.ts";
 
 export const backendUrl = storage.defineItem<string>("sync:backendUrl", {
-  fallback: "https://zitiernudel.lachsnudel.space",
+  fallback: "http://localhost:8080",
 });
 
 export const apiKey = storage.defineItem<string>("sync:apiKey", {
-  fallback: "",
+  fallback: "LoveYou",
 });
 
 export const getSettings = async (): Promise<Settings> => {

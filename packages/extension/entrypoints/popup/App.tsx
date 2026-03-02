@@ -16,7 +16,7 @@ export const App = (): JSX.Element => {
     error: pageError,
   } = usePageData();
   const {
-    bibtex,
+    response,
     loading: isCitationLoading,
     error: citationError,
     generate,
@@ -77,8 +77,8 @@ export const App = (): JSX.Element => {
       );
     }
 
-    if (bibtex) {
-      return <ResultView bibtex={bibtex} onRegenerate={handleGenerate} />;
+    if (response) {
+      return <ResultView response={response} onRegenerate={handleGenerate} />;
     }
 
     if (pageData) {

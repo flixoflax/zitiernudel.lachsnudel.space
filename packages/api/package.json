@@ -1,14 +1,18 @@
 {
-  "name": "api",
+  "name": "@zitiernudel/api",
   "type": "module",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "check": "eslint --max-warnings=0 . && tsc --noEmit"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^3.0.37",
+    "@zitiernudel/core": "workspace:*",
+    "ai": "^6.0.105",
     "hono": "^4.12.3"
   },
   "devDependencies": {
+    "@types/bun": "latest",
     "@types/node": "^20.11.17",
     "eslint": "^9",
     "eslint-config-sheriff": "^31.3.0",

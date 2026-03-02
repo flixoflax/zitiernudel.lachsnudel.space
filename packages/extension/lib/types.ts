@@ -1,31 +1,23 @@
-/** Metadata extracted from the page's <head> element. */
-export interface PageMeta {
-  authors: string[];
-  description: string | null;
-  siteName: string | null;
-  publishedDate: string | null;
-  modifiedDate: string | null;
-  /** All og:* and article:* meta properties. */
-  ogTags: Record<string, string>;
-  /** All citation_* meta tags (Google Scholar / legal DB schema). */
-  citationTags: Record<string, string>;
-  /** Parsed <script type="application/ld+json"> blocks. */
-  ldJson: unknown[];
-}
+/**
+ * Re-export types from the core package.
+ * The core package provides shared types and Zod schemas
+ * used by both the extension and the API.
+ */
+export type {
+  BibTeXEntryType,
+  BibTeXResponse,
+  Confidence,
+  PageData,
+  PageMeta,
+  Settings,
+} from "@zitiernudel/core/types";
 
-/** Data collected from the active tab by the content script. */
-export interface PageData {
-  url: string;
-  title: string;
-  /** Text the user had selected, or null if nothing was selected. */
-  selectedText: string | null;
-  meta: PageMeta;
-  /** Cleaned page content converted to Markdown (~4000 chars max). */
-  markdown: string;
-}
-
-/** User-configurable extension settings. */
-export interface Settings {
-  backendUrl: string;
-  apiKey: string;
-}
+// Re-export schemas for runtime validation if needed
+export {
+  bibTeXEntryTypeSchema,
+  bibTeXResponseSchema,
+  confidenceSchema,
+  pageDataSchema,
+  pageMetaSchema,
+  settingsSchema,
+} from "@zitiernudel/core/types";
