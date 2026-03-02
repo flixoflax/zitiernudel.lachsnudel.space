@@ -1,0 +1,14 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  // "prettier.configPath": "./packages/prettier-config/prettier.config.js",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true, // Tell VSCode to format files on save and paste
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // Tell VSCode to use Prettier as default file formatter
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ]
+}
