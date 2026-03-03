@@ -6,7 +6,7 @@ import {
   pageDataSchema,
   pageMetaSchema,
   settingsSchema,
-} from "./schemas.js";
+} from "./schemas";
 
 // ============================================================================
 // Re-export Zod schemas for validation

@@ -1,10 +1,7 @@
 import { generateText, Output } from "ai";
 import { openai } from "@ai-sdk/openai";
-import {
-  type BibTeXResponse,
-  bibTeXResponseSchema,
-} from "@zitiernudel/core/types";
 import { SYSTEM_PROMPT } from "../prompt";
+import { type BibTeXResponse, bibTeXResponseSchema } from "./types";
 
 interface PDFMetadata {
   url: string;

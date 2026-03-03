@@ -148,9 +148,10 @@ export const bibTeXResponseSchema = z.object({
 
   /**
    * Confidence in data quality based on available information.
-   * - "high": All required fields found with high certainty
-   * - "medium": Most fields found, some inferred from context
-   * - "low": Significant data missing or highly uncertain
+   *
+   * - "high": All required fields found with high certainty.
+   * - "medium": Most fields found, some inferred from context.
+   * - "low": Significant data missing or highly uncertain.
    */
   confidence: confidenceSchema.describe(
     "Confidence in data quality: high (all fields found), medium (some inferred), low (significant gaps or uncertainty)",
@@ -158,8 +159,8 @@ export const bibTeXResponseSchema = z.object({
 
   /**
    * LaTeX footnote citation example with proper formatting.
-   * Shows user how to cite this source in their document.
-   * e.g., "\\footcite[S.~42]{maurer:verwaltungsrecht}"
+   * Shows the user how to cite this source in their document.
+   * Example: `\footcite[S.~42]{maurer:verwaltungsrecht}`.
    */
   footnoteExample: z
     .string()
@@ -170,7 +171,7 @@ export const bibTeXResponseSchema = z.object({
   /**
    * List of warnings about missing or uncertain data.
    * Empty array if no issues detected.
-   * e.g., ["Keine Auflage gefunden", "Autor aus URL geraten"]
+   * Example: `["Keine Auflage gefunden", "Autor aus URL geraten"]`.
    */
   warnings: z
     .array(z.string())

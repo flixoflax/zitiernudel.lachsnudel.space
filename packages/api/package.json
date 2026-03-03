@@ -1,15 +1,19 @@
 {
   "name": "@zitiernudel/api",
   "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/lib/types.ts"
+  },
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "check": "eslint --max-warnings=0 . && tsc --noEmit"
   },
   "dependencies": {
     "@ai-sdk/openai": "^3.0.37",
-    "@zitiernudel/core": "workspace:*",
     "ai": "^6.0.105",
-    "hono": "^4.12.3"
+    "hono": "^4.12.3",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/bun": "latest",

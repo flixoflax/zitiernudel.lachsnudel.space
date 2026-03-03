@@ -1,11 +1,11 @@
 import { generateText, Output } from "ai";
 import { openai } from "@ai-sdk/openai";
+import { SYSTEM_PROMPT } from "../prompt";
 import {
   type BibTeXResponse,
   bibTeXResponseSchema,
   type PageData,
-} from "@zitiernudel/core/types";
-import { SYSTEM_PROMPT } from "../prompt";
+} from "./types";
 
 /**
  * Generate a fallback citation key from page data.

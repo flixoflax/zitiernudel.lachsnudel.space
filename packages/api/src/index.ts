@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { bearerAuth } from "hono/bearer-auth";
-import { cors } from "./middleware/cors.js";
-import { citeRoutes } from "./routes/cite.js";
+import { cors } from "./middleware/cors";
+import { citeRoutes } from "./routes/cite";
 
 const app = new Hono();
 const token = process.env.API_TOKEN ?? "L4ch5nud3ln";

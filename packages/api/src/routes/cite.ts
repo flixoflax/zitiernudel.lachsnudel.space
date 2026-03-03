@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { pageDataSchema } from "@zitiernudel/core/types";
 import { generateCitation } from "../lib/generate-citation";
 import { generateCitationFromPDF } from "../lib/generate-citation-pdf";
+import { pageDataSchema } from "../lib/types";
 
 /**
  * Citation generation routes.

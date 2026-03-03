@@ -1,6 +1,6 @@
 /**
- * Re-export types from the core package.
- * The core package provides shared types and Zod schemas
+ * Re-export types from the api package.
+ * The api package provides shared types and Zod schemas
  * used by both the extension and the API.
  */
 export type {
@@ -10,7 +10,7 @@ export type {
   PageData,
   PageMeta,
   Settings,
-} from "@zitiernudel/core/types";
+} from "@zitiernudel/api/types";
 
 // Re-export schemas for runtime validation if needed
 export {
@@ -20,4 +20,4 @@ export {
   pageDataSchema,
   pageMetaSchema,
   settingsSchema,
-} from "@zitiernudel/core/types";
+} from "@zitiernudel/api/types";
