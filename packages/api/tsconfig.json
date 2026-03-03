@@ -5,7 +5,7 @@
     "moduleDetection": "force",
     "strict": true,
     "skipLibCheck": true,
-    "types": ["bun"],
+    "types": ["bun", "node"],
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
     "outDir": "./dist",
