@@ -4,7 +4,7 @@ import { cors } from "./middleware/cors.js";
 import { citeRoutes } from "./routes/cite.js";
 
 const app = new Hono();
-const token = Bun.env.API_TOKEN ?? "L4ch5nud3ln";
+const token = process.env.API_TOKEN ?? "L4ch5nud3ln";
 
 // CORS middleware (must come first to handle preflight requests)
 app.use("*", cors());

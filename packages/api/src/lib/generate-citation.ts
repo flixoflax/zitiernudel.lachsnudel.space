@@ -125,8 +125,8 @@ const buildUserMessage = (pageData: PageData): string => {
 export const generateCitation = async (
   pageData: PageData,
 ): Promise<BibTeXResponse> => {
-  const model = Bun.env.OPENAI_MODEL ?? "gpt-4o-mini";
-  const apiKey = Bun.env.OPENAI_API_KEY;
+  const model = process.env.OPENAI_MODEL ?? "gpt-4o-mini";
+  const apiKey = process.env.OPENAI_API_KEY;
 
   if (!apiKey) {
     throw new Error(
